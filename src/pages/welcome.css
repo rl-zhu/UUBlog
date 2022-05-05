@@ -1,0 +1,82 @@
+
+/* 
+:root{
+    
+} */
+
+*{
+	margin:0;
+	box-sizing: border-box;
+
+}
+
+*{
+    --header-hight:10vh;
+    --box-margin:10vh;
+    --form-width: 40vh;
+    --form-height: 60vh;
+}
+.header{
+    
+    display: flex;
+    height: var(--header-hight);
+    text-align:center;
+    background-color: rgb(116, 106, 191);
+}
+
+.forum{
+    color: blue;
+    /* display: inline-block; */
+    margin-left: var(--box-margin);
+    line-height: var(--header-hight);
+    
+}
+.login{
+    padding-left: 20px;
+    display: inline-block;
+    margin:  auto var(--box-margin) auto auto;
+}
+
+.welbox {
+    width: var(--form-width);
+    height: var(--form-height);
+    background-color:  rgb(118, 118, 40);
+    /* display: flex; */
+    /* justify-content: space-between; */
+    margin: 20vh auto;
+    /* padding: 4vh 7vh; */
+    visibility: hidden;
+    
+}
+
+.login-box h4{
+    line-height: 8vh;
+    margin: 0 auto;
+    text-align:center;
+}
+
+.login-box p{
+    line-height: 4vh;
+    margin: 15px 0px 0px auto;
+
+}
+
+
+.login-box{
+    display: inline-block;
+    width: var(--form-width);
+    height: var(--form-height);
+    background-color: beige;
+    padding: 6vh;
+    position: absolute;
+}
+.login-box button{
+    margin-top: 20px;
+    display: inline-block;
+    margin: 20px auto 0 ;
+    
+}
+
+.bgbox{
+    position: absolute;
+}
