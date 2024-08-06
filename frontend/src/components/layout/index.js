@@ -6,7 +6,7 @@ import {
     EditOutlined,
     SettingOutlined
 } from '@ant-design/icons'
-import './index.scss'
+// import './index.scss'
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom'
 import { useStore } from '@/store'
 import { useEffect } from 'react'

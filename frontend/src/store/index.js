@@ -1,6 +1,6 @@
 import React from "react"
-import LoginStore from "./login.Store"
-import UserStore from "./userStore"
+import LoginStore from "./login-store"
+import UserStore from "./users-store"
 
 class RootStore{
     constructor(){

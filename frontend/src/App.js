@@ -2,12 +2,11 @@
 import './App.css';
 import { unstable_HistoryRouter as HistoryRouter, BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { history } from './utils/history';
-import { AuthComponent } from '@/components/AuthComponent'
-import Login from '@/pages/Login';
-import Layout from '@/pages/Layout';
-import Publish from './pages/Layout/Publish';
-import Profile from './pages/Layout/Profile';
-import Article from './pages/Layout/Article/index'
+import { AuthComponent } from './components/auth-comp'
+import Login from './pages/login-page';
+import Layout from './components/layout';
+import Profile from './pages/profile';
+import Article from './pages/write-article/index'
 
 
 
@@ -26,7 +25,6 @@ function App() {
           }>
             <Route path='profile' element={<Profile />}> </Route>
             <Route path='article' element={<Article />}> </Route>
-            <Route path='publish' element={<Publish />}> </Route>
           </Route>
         </Routes>
       </div>

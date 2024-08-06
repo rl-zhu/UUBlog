@@ -1,36 +1,22 @@
 import { Card } from 'antd';
 import { Form, Input, Button, Checkbox } from 'antd';
 import  {useNavigate} from 'react-router-dom'
-import './index.scss'
 import {useStore} from '@/store/index'
 import { observer } from 'mobx-react-lite'
-// import { useNavigate } from 'react-router-dom';
-// import LoginStore from '@/store/login.Store';
+
 function Login() {
-    //get the input infos
     const {loginStore} = useStore()
     const navigate = useNavigate()
  
     const onFinish = async(values) => {
         console.log(values)
-       
-        // loginStore.getToken(values)
         await loginStore.getToken({
             username: values.username,
             password: values.password,
 
         })
-    //    //not able to do destructure
-    //     // var {phone, passw} = values
-    //     const phone = values.username
-    //     const passw = values.password
-    //     console.log(phone, passw)
-        
-    //     loginStore.getToken({phone, passw})
         console.log(loginStore.token)
-        console.log('navi')
         navigate('/my',{replace:true})
-
       }
     const onFinishFailed = (errinfo)=>{
         console.log(errinfo)

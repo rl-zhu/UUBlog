@@ -34,6 +34,7 @@ app.use((req, res, next)=>{
 
 const config = require('./config')
 const { expressjwt: jwt } = require("express-jwt");
+// check token with signed ones
 app.use(jwt({secret: config.jwtSecretKey, algorithms: ["HS256"] }).unless({ path: [/^\/home/] }))
 
 
