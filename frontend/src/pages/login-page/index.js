@@ -34,7 +34,7 @@ function Login() {
 
     const handleLogin = async (e) => {
         if (validatePassword(password)) {
-            alert("Form submitted successfully!");
+            
             await loginStore.getToken({
                 username: username,
                 password: password,
@@ -44,15 +44,15 @@ function Login() {
             navigate('/my', { replace: true })
 
         } else {
-            alert("Please correct the errors before submitting.");
+            alert("Incorrect username or password. Please try again.");
         }
     };
 
     const handleRegister = (e) => {
         if (validatePassword(password)) {
-            alert("Form submitted successfully!");
+            alert("Registered successfully!");
         } else {
-            alert("Please correct the errors before submitting.");
+            alert("Please check password and try again.");
         }
     };
 
