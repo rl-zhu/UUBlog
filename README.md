@@ -5,11 +5,19 @@ This project is a full-stack application that allows users to register, log in, 
 
 
 ## Technologies Used
-Frontend: React, Tailwind CSS
-Backend: Node.js, Express.js
-Authentication: JWT (JSON Web Token)
-Database: MySQL
+- Frontend: React, Tailwind CSS
+- Backend: Node.js, Express.js
+- Authentication: JWT (JSON Web Token)
+- Database: MySQL
 
 ## Steps to run
-``` npm install ``` then ```npm start```: install dependencies 
-or ``` yarn install ``` then ```yarn start```: start the project
+### frontend
+- ```cd frontend```
+- ``` npm install ``` then ```npm start```: install dependencies
+   
+    or ``` yarn install ``` then ```yarn start```: start the project
+
+
+### backend
+- ```cd backend```
+- ``` node server.js ``` 
