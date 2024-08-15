@@ -9,11 +9,9 @@ const config = require('../config')
 
 
 exports.register = (req, res) => {
+    console.log("in the register")
     const userinfo = req.body
     console.log(userinfo)
-    // console.log(req)
-    //res.send只能在同时存在一次
-    // 确定数据库
     const sqlStr = 'select * from users where username = ?'
     db.query(sqlStr, [userinfo.username], (err, results) => {
         console.log('in query')
@@ -57,6 +55,7 @@ exports.login = (req, res) => {
         if (err) {
             // return res.send({ message: err.message })
             // use the res.cc func
+            console.log(err)
             return res.cc(err)
         }
         if (results.length !== 1) {

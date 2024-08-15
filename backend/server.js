@@ -35,13 +35,12 @@ app.use((req, res, next)=>{
 const config = require('./config')
 const { expressjwt: jwt } = require("express-jwt");
 // check token with signed ones
-app.use(jwt({secret: config.jwtSecretKey, algorithms: ["HS256"] }).unless({ path: [/^\/home/] }))
-
+app.use(jwt({secret: config.jwtSecretKey, algorithms: ["HS256"] }).unless({ path: [/^\/auth/] }))
 
 // import and use userRouter
-const userRouter = require('./router/user')
+const authRouter = require('./router/auth')
 // Add uniform prefix
-app.use('/home', userRouter)
+app.use('/auth', authRouter)
 
 const userInfo = require('./router/userinfo')
 app.use('/my', userInfo)
