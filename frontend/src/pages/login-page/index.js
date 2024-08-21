@@ -6,12 +6,12 @@ import { useState } from 'react';
 
 function Login() {
 
-    const { loginStore } = useStore()
+    const { authStore } = useStore()
     const navigate = useNavigate()
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
-    const [passwordError, setPasswordError] = useState("");
+    const [errorMsg, serErrorMsg] = useState("");
     const [isLogin, setIsLogin] = useState(true)
 
     const validatePassword = (password) => {
@@ -24,36 +24,54 @@ function Login() {
         setPassword(value);
 
         if (!validatePassword(value)) {
-            setPasswordError(
+            serErrorMsg(
                 "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character. Minimum length is 8."
             );
         } else {
-            setPasswordError("");
+            serErrorMsg("");
         }
     };
 
     const handleLogin = async (e) => {
-        if (validatePassword(password)) {
+        try {
+            serErrorMsg("")
+            if (validatePassword(password)) {
+                const res = await authStore.login({
+                    username: username,
+                    password: password,
+
+                })
+                console.log("res of login")
+                console.log(res)
+                console.log(authStore.token)
+                navigate('/my', { replace: true })
+            } else {
+                alert("Incorrect username or password. Please try again.");
+            }
+        } catch (error) {
+            serErrorMsg(`Login failed: ${error.response.data.message}`)
             
-            await loginStore.getToken({
-                username: username,
-                password: password,
-
-            })
-            console.log(loginStore.token)
-            navigate('/my', { replace: true })
-
-        } else {
-            alert("Incorrect username or password. Please try again.");
         }
     };
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
+        try {
         if (validatePassword(password)) {
-            alert("Registered successfully!");
+            const res = await authStore.register({
+                username: username,
+                password: password,
+            })
+
+            console.log(res)
+
+            // alert("Registered successfully!");
         } else {
             alert("Please check password and try again.");
         }
+    } catch (error) {
+        serErrorMsg(`Register failed: ${error.response.data.message}`)
+        
+    }
     };
 
     return (
@@ -96,8 +114,8 @@ function Login() {
                             />
 
                         </div>
-                        {passwordError &&
-                            <div className="text-red-500 text-sm mt-2">{passwordError}</div>
+                        {errorMsg &&
+                            <div className="text-red-500 text-sm mt-2">{errorMsg}</div>
                         }
 
                         <button
@@ -119,7 +137,7 @@ function Login() {
                 <div
                     onMouseEnter={() => setIsLogin(false)}
                     className={`register-box  transition-all  duration-300 px-[2rem] py-[2rem] 
-                    items-center justify-center text-white ${!isLogin ? 'w-5/6 bg-bg-orange ' : 'w-1/6 bg-red-300 flex'}`}
+                    items-center justify-center text-white ${!isLogin ? 'w-5/6 bg-red-300 ' : 'w-1/6 bg-red-300 flex'}`}
                 >
                     {!isLogin ? <>
                         <div className="mb-4 flex gap-5 items-center">
@@ -152,8 +170,8 @@ function Login() {
                             />
 
                         </div>
-                        {passwordError &&
-                            <div className="text-red-500 text-sm mt-2">{passwordError}</div>
+                        {errorMsg &&
+                            <div className="text-red-500 text-sm mt-2">{errorMsg}</div>
                         }
                         <button
                             className="w-[6rem] bg-bg-lmocha hover:bg-bg-mocha  text-white py-2 px-4 rounded-md shadow-sm 

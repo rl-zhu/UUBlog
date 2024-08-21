@@ -4,37 +4,47 @@ import { http, getToken, setToken, clearToken } from '@/utils'
 // import { query } from 'express';
 const qs = require('qs');
 
-class LoginStore {
+class AuthStore {
     token = getToken() || ''
+    
     constructor() {
         makeAutoObservable(this)
+    }
+
+    register = async ({ username, password }) => {
+        // console.log('token', username, password)
+        const res = await http.post('/auth/register', qs.stringify({ username, password }))
+        return res;
 
     }
-    getToken = async ({ username, password }) => {
+    login = async ({ username, password }) => {
         // console.log('token', username, password)
-        const res = await http.post('http://localhost:50000/home/login',
+        const res = await http.post('/auth/login',
             qs.stringify({ username, password }),
-            {
-                params: {
-                    ID: 12345
-                },
-            }
+            // {
+            //     params: {
+            //         ID: 12345
+            //     },
+            // }
             // {username, password}
         )
 
         // use token to store in memory
+        // console.log(res.data)
+        
         this.token = res.data.token
-        console.log('token is ', res.data.token)
+        // console.log('token is ', res.data.token)
         // console.log(res)
 
         //store in loginStore
         setToken(this.token)
+        return res
 
     }
-    loginOut = ()=>{
+    logOut = ()=>{
         this.token = ''
         clearToken()
     }
 }
 
-export default LoginStore
+export default AuthStore

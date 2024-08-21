@@ -2,10 +2,13 @@ import axios from 'axios'
 import { getToken } from './token'
 import { history } from './history'
 
+const baseURL = process.env.REACT_APP_BASE_URL
+
+console.log(baseURL)
 //instantiate
 const http = axios.create({
     // login url 
-  baseURL: 'http://localhost:50000',
+  baseURL: baseURL,
   timeout: 5000
 })
 // req handle
