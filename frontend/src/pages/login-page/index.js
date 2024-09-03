@@ -75,11 +75,20 @@ function Login() {
     };
 
     return (
-        <div className='login-page flex items-center justify-center w-[100vw] h-[100vh]'>
+
+       
+        <div className='login-page flex flex-col items-center justify-center w-[100vw] h-[100vh]'>
+        <p className="text-[3rem] font-hw1 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+  Welcome to UU blog
+</p>
+        <p className='my-[1rem] font-[700]'>
+        Ruilin's Full-stack project with React as Frontend and Node.js as Backend
+        </p>
 
             <div className='relative box_parent flex border-2 border-slate-100 w-[35rem] h-[15rem] rounded-md overflow-hidden'>
                 <div className={`login-box  transition-all duration-300 px-[2rem] py-[2rem] items-center justify-center text-white
-             ${!isLogin ? 'w-1/6 bg-blue-300 flex items-center' : 'w-5/6 bg-bg-mocha '}
+             ${!isLogin ?
+                 'w-1/6 bg-blue-300 flex items-center' : 'w-5/6 bg-bg-mocha '}
              
             `}
                     onMouseEnter={() => setIsLogin(true)}>

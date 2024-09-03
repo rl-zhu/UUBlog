@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+        fontFamily:{
+          hw1:["Playwrite DE Grund"]
+        },
         colors: {
           bg:{
             mocha:'#80beaf',

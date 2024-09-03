@@ -14,19 +14,12 @@ exports.register = (req, res) => {
     console.log(userinfo)
     const sqlStr = 'select * from users where username = ?'
     db.query(sqlStr, [userinfo.username], (err, results) => {
-        console.log('in query')
         if (err) {
-            // return res.send({ message: err.message })
-            // use the res.cc func
             return res.cc(err)
         }
         if (results.length > 0) {
-            // return res.send({ message: 'users exists' })
-            return res.cc('users exists')
+            return res.cc('Users exists')
         }
-        // res.send('Register successfully')
-        // console.log('query sql')
-        // use bcript.hasgSync()
         console.log(userinfo.password)
         userinfo.password = bcrypt.hashSync(userinfo.password, 10)
         console.log(userinfo.password)
@@ -37,8 +30,8 @@ exports.register = (req, res) => {
             // if (err) return res.send({status:1, message: err.message})
             if (err) return res.cc(err)
             // if(results.affectedRows !==1) return res.send({message: 'shibai'})
-            if (results.affectedRows !== 1) return res.cc('registering error')
-            res.send({ message: 'success register' })
+            if (results.affectedRows !== 1) return res.cc('Registration failed: Please try again later.');
+            res.send({ message: 'Registration successful! Welcome aboard.' });
         })
     })
 
@@ -53,18 +46,14 @@ exports.login = (req, res) => {
     const sqlStr = 'select * from users where username = ?'
     db.query(sqlStr, [userinfo.username], (err, results) => {
         if (err) {
-            // return res.send({ message: err.message })
-            // use the res.cc func
-            console.log(err)
             return res.cc(err)
         }
         if (results.length !== 1) {
-            // return res.send({ message: 'users exists' })
-            return res.cc('uery result !== 1, login fails')
+            return res.cc('User not found', 5);
         }
         // compare bcrypted password with input password
         const comparePassword = bcrypt.compareSync(userinfo.password, results[0].password)
-        if(!comparePassword) return res.cc('password error')
+        if(!comparePassword) return res.cc('Incorrect password. Please try again.', 6);
 
         // console.log(results[0])
         // token generate 
@@ -79,11 +68,7 @@ exports.login = (req, res) => {
             token: 'Bearer '+tokenStr,
             message: "login ok",
         })
-        // return res.send(req)
 
     })
 
-
-
-    // console.log(req) 
 }
